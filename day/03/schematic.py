@@ -34,7 +34,7 @@ def locate_num_start(row: int, col: int) -> int:
     return col + 1
 
 
-def identify_adjacent_numbers(row: int, col: int) -> Set:
+def identify_adjacent_numbers(row: int, col: int) -> list:
     if not is_symbol(row, col):
         raise ValueError(f"{row:},{col:} must be symbol")
     numbers = {}
@@ -50,7 +50,7 @@ def identify_adjacent_numbers(row: int, col: int) -> Set:
                 num_start = locate_num_start(i, j)
                 num = parse_num(i, num_start)
                 numbers[(i, num_start)] = num
-    return set(numbers.values())
+    return list(numbers.values())
 
 
 if __name__ == "__main__":
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     sum = 0
     for row, line in enumerate(lines):
         for col, _ in enumerate(line):
-            if is_symbol(row, col):
+            if is_symbol(row, col) and lines[row][col] == "*":
                 adjacent_nums = identify_adjacent_numbers(row, col)
                 if len(adjacent_nums) == 2:
                     sum += prod(adjacent_nums)
