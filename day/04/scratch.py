@@ -11,8 +11,6 @@ class Scratchoff:
 
     def winnings(self) -> int:
         matching_numbers = self.matching_numbers()
-        if not matching_numbers:
-            return 0
         return int(2 ** (len(self.matching_numbers()) - 1))
 
 
